@@ -23,7 +23,7 @@ This project is a simple Contact Manager App with a backend RESTful API and a mo
 **Mobile Frontend:**
 
 1. Install Node.js and npm.
-2. Clone the `jvec-assessment-mobile` repository.
+2. Clone the [`jvec-assessment-mobile` repository](https://github.com/awesomegoodman/jvec-assessment-mobile).
 3. Navigate to the project folder.
 4. Install dependencies with `npm install`.
 5. Run the app with `npx react-native run-android` (ensure an Android emulator or device is connected).

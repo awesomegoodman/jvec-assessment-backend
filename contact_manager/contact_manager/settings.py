@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-krwh%8zq3zv-v13@p9*#eugt17u++i7#34qs7y2ongq(-u0(6$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
+    'corsheaders',
     'contact_manager_app',
     'rest_framework',
     'rest_framework.authtoken',
@@ -58,6 +59,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'corsheaders.middleware.CorsMiddleware',
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://*",
+    "https://*",
 ]
 
 ROOT_URLCONF = 'contact_manager.urls'
