@@ -66,3 +66,7 @@ Ensure that CORS policies are set up for your frontend's domain.
 **Logging**
 
 Set up logging to monitor and track unauthorized access.
+
+**API Documentation**
+
+- API documentation is available via Swagger at `/swagger/`. You can access interactive documentation to explore and test the API endpoints.

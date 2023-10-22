@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # 'django.contrib.staticfiles',
     'corsheaders',
+    'drf_yasg',
     'contact_manager_app',
     'rest_framework',
     'rest_framework.authtoken',
@@ -69,6 +71,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://*",
     "https://*",
 ]
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,
+    'api_version': '1.0',
+    'enabled_methods': ['get', 'post', 'put', 'patch', 'delete'],
+}
 
 ROOT_URLCONF = 'contact_manager.urls'
 
