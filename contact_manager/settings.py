@@ -110,17 +110,12 @@ WSGI_APPLICATION = 'contact_manager.wsgi.application'
 # Check if the code is running in a production environment (e.g., Heroku)
 if IS_PRODUCTION:
     # print('Running in production environment; db=heroku_postgreSQL')
-    # Database
-    # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-    # Production database settings
-    # Set default database to PostgreSQL
+    # Production database settings | Set default database to PostgreSQL
     DATABASES = {
         'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
 else:
     # print('Locally run; db=default_sqlite')
-    # Database
     # Local database settings
     DATABASES = {
         'default': {
@@ -164,7 +159,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
