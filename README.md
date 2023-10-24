@@ -1,72 +1,51 @@
-# Contact Manager App
+# Contact Manager Backend
 
-**Overview**
+## Overview
 
-This project is a simple Contact Manager App with a backend RESTful API and a mobile frontend. It allows users to manage their contacts, including adding, updating, and deleting them. The backend is built using Django, while the mobile frontend is created with React Native.
+This project serves as the backend for a Contact Manager application, offering essential features for user management and contact operations. Users can seamlessly manage their contacts, including creation, updates, and removal.
 
-**Features**
+## Key Features
 
-- User Registration and Authentication
-- Create, Update, and Delete Contacts
-- List and View Contact Details
+- **User Management and Authentication**: Securely create, log in, and log out users.
+- **Contact Operations**: Facilitate Create, Read, Update, and Delete (CRUD) actions on contacts.
+- **Data Validation**: Ensure the accuracy of contact data through validation.
+- **Database**: Employ PostgreSQL to securely store user and contact data.
+- **Security**: Enhance security with token-based authentication and password hashing.
+- **Unit Testing**: Maintain code reliability with unit tests for Create and Update API endpoints.
 
-**Installation**
-
-**Backend:**
+## Getting Started
 
 1. Ensure you have Python and Django installed.
-2. Clone this repository.
-3. Install required Python packages using `pip install -r requirements.txt`.
-4. Apply database migrations with `python manage.py migrate`.
-5. Start the Django server: `python manage.py runserver`.
+2. Clone this [repository](https://github.com/awesomegoodman/jvec-assessment-backend)
+3. Install required Python packages: `pip install -r requirements.txt`.
+4. Apply database migrations: `python manage.py migrate`.
+5. Launch the Django server: `python manage.py runserver`.
 
-**Mobile Frontend:**
+## API Endpoints
 
-1. Install Node.js and npm.
-2. Clone the [`jvec-assessment-mobile` repository](https://github.com/awesomegoodman/jvec-assessment-mobile).
-3. Navigate to the project folder.
-4. Install dependencies with `npm install`.
-5. Run the app with `npx react-native run-android` (ensure an Android emulator or device is connected).
+- `POST /users/create`: Register a new user.
+- `POST /users/login`: Log in to obtain an authentication token.
+- `POST /users/logout`: Log out by invalidating the authentication token.
+- `POST /contacts/create`: Add a new contact.
+- `GET /contacts/list`: Retrieve a list of all contacts.
+- `GET /contacts/detail/{contact_id}`: Retrieve details of a single contact.
+- `PUT /contacts/update/{contact_id}`: Update a contact.
+- `DELETE /contacts/delete/{contact_id}`: Delete a contact.
 
-**API Endpoints**
+## Data Validation
 
-- User Registration: `/users/create/`
-- User Login: `/users/login/`
-- User Logout: `/users/logout/`
-- Create Contact: `/contacts/create/`
-- List Contacts: `/contacts/list/`
-- View Contact Details: `/contacts/detail/<contact_id>/`
-- Update Contact: `/contacts/update/<contact_id>/`
-- Delete Contact: `/contacts/delete/<contact_id>/`
+- The API enforces data validation to guarantee well-formatted contact information.
 
-**Authentication**
+## Database
 
-- Token-based authentication is used. Include the token in the header for authenticated requests.
+- PostgreSQL serves as the database, ensuring secure storage of user and contact data.
 
-**Unit Tests**
+## Security
 
-Unit tests are provided to ensure the functionality of the API. Run tests with `python manage.py test`.
-
-**Security**
-
+- Token-based authentication ensures data security.
 - Passwords are securely hashed.
-- Rate limiting is in place to protect against brute-force attacks.
-- Ensure your API is served over HTTPS.
-- Validate and sanitize input data.
-- Implement authentication and authorization for user actions.
 
-**Error Handling**
+## Unit Testing
 
-Detailed error handling is implemented to provide informative responses.
-
-**CORS**
-
-Ensure that CORS policies are set up for your frontend's domain.
-
-**Logging**
-
-Set up logging to monitor and track unauthorized access.
-
-**API Documentation**
-
-- API documentation is available via Swagger at `/swagger/`. You can access interactive documentation to explore and test the API endpoints.
+- Unit tests have been implemented for the Create and Update API endpoints to validate code reliability.
+- Run tests with `python manage.py test`.
