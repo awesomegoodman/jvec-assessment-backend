@@ -9,6 +9,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from .serializers import UserSerializer, ContactSerializer
 from .models import Contact
+from django.http import JsonResponse
 
 # View for creating a new user (user registration)
 
@@ -16,6 +17,20 @@ from .models import Contact
 class UserCreateView(CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    
+    def create(self, request, *args, **kwargs):
+        # Check if a user with the same username already exists
+        existing_user_username = User.objects.filter(username=request.data.get('username')).first()
+        
+        # Check if a user with the same email already exists
+        existing_user_email = User.objects.filter(email=request.data.get('email')).first()
+
+        if existing_user_username or existing_user_email:
+            # Return a 400 Bad Request response if the user already exists
+            return Response({"error": "User with this username or email already exists."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # If the user doesn't exist, proceed with the registration
+        return super().create(request, *args, **kwargs)
 
 
 # View for logging user in
@@ -65,6 +80,15 @@ class ContactCreateView(CreateAPIView):
 class ContactListView(ListAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+    
+    def get_queryset(self):
+        # Check if the user is authenticated
+        if self.request.user.is_authenticated:
+            # Filter contacts by the currently authenticated user
+            return Contact.objects.filter(user=self.request.user)
+        else:
+            # User is not authenticated, return a handle as needed
+            return JsonResponse({"message": "User is not authenticated."}, status=400)
 
 # View for retrieving details of a single contact
 
