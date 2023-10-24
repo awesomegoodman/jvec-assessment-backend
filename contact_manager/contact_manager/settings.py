@@ -11,6 +11,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+IS_PRODUCTION = 'LOCAL' not in os.environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -99,26 +107,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'contact_manager.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# Check if the code is running in a production environment (e.g., Heroku)
+if IS_PRODUCTION:
+    # print('Running in production environment; db=heroku_postgreSQL')
+    # Database
+    # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    # Production database settings
+    # Set default database to PostgreSQL
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
-
-    # # Set PostgreSQL as default Database
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'your_db_name',
-    #     'USER': 'your_db_user',
-    #     'PASSWORD': 'your_db_password',
-    #     'HOST': 'localhost',  # Or the IP address of your PostgreSQL server
-    #     'PORT': '5432',  # Default PostgreSQL port
-    # }
-
-}
+else:
+    # print('Locally run; db=default_sqlite')
+    # Database
+    # Local database settings
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
