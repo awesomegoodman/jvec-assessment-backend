@@ -1,1 +1,1 @@
-web: gunicorn esp32.wsgi --log-file -
+web: gunicorn contact_manager.wsgi --log-file -
